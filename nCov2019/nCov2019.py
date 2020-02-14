@@ -30,12 +30,40 @@ class Data:
     
     
     def __init__(self): 
+        self._trans = {'confirm': '确诊', 
+                       'suspect': '疑似', 
+                       'dead': '病亡', 
+                       'heal': '治愈',  
+                       'date': '日期', 
+                       'isUpdated': '数据已更新', 
+                       'hubei': '湖北', 
+                       'country': '全国',
+                       'notHubei': '非湖北', 
+                       'deadRate': '病亡率', 
+                       'healRate': '治愈率', 
+                       'hubeiDead': '湖北病亡', 
+                       'hubeiConfirm': '湖北确诊', 
+                       'countryDead': '全国病亡', 
+                       'countryConfirm': '全国确诊', 
+                       'hubeiRate': '湖北比率', 
+                       'notHubeiRate': '非湖北比率', 
+                       'countryRate': '全国比率', 
+                       'yesterday': '昨日', 
+                       'before': '前日', 
+                       'addRate': '增加率', 
+                       'name': '名称'}
         self.statistics = self._request_data()
         self.china = self._china_data()
         self.province = self._province_data()
         self.city = self._city_data()
         self.international = self._country_data()
         self.update_time = self._update_time_data()
+        self.history_china = self._china_history()
+        self.history_china_add = self._china_add_history()
+        self.history_add = self._add_history()
+        self.history_dead = self._dead_rate_history()
+        self.confirm_add_rank = self._confirm_add_rank()
+        self.news = self._news()
         
         
     def _request_data(self): 
@@ -67,11 +95,7 @@ class Data:
         
         # Put data in a DataFrame
         df = pd.DataFrame(data=array_list, index=index)
-        df.rename(columns={'confirm': '确诊', 
-                   'suspect': '疑似', 
-                   'dead': '死亡', 
-                   'heal': '治愈', 
-                   'isUpdated': '数据已更新'}, 
+        df.rename(columns=self._trans, 
           inplace=True)
         return df
     
@@ -98,11 +122,7 @@ class Data:
         
         # Put data in a DataFrame
         df = pd.DataFrame(data=array_list, index=index)
-        df.rename(columns={'confirm': '确诊', 
-                   'suspect': '疑似', 
-                   'dead': '死亡', 
-                   'heal': '治愈', 
-                   'isUpdated': '数据已更新'}, 
+        df.rename(columns=self._trans, 
           inplace=True)
         return df
         
@@ -123,12 +143,7 @@ class Data:
                 array_list.append(pd.Series(data=country_dict[country][dimension]))
 
         df = pd.DataFrame(data=array_list, index=index)
-        df.rename(columns={'confirm': '确诊', 
-                           'suspect': '疑似', 
-                           'dead': '死亡', 
-                           'heal': '治愈', 
-                           'isUpdated': '数据已更新'}, 
-                  inplace=True)
+        df.rename(columns=self._trans, inplace=True)
         return df
     
     
@@ -136,13 +151,47 @@ class Data:
         china_total = pd.Series(self.statistics['chinaTotal'])
         china_add = pd.Series(self.statistics['chinaAdd'])
         df = pd.DataFrame([china_total, china_add], index=['累计', '新增'])
-        df.rename(columns={'confirm': '确诊', 
-                   'suspect': '疑似', 
-                   'dead': '死亡', 
-                   'heal': '治愈', 
-                   'isUpdated': '数据已更新'}, 
-                  inplace=True)
+        df.rename(columns=self._trans, inplace=True)
         return df
+    
+            
+    def _china_history(self): 
+        df = pd.DataFrame(self.statistics['chinaDayList'])[['date', 'confirm', 'suspect', 'dead', 'heal', 'deadRate', 'healRate']]
+        df.rename(columns=self._trans, inplace=True)
+        df.set_index('日期', inplace=True)
+        return df
+        
+    
+    def _china_add_history(self): 
+        df = pd.DataFrame(self.statistics['chinaDayAddList'])[['date', 'confirm', 'suspect', 'dead', 'heal', 'deadRate', 'healRate']]
+        df.rename(columns=self._trans, inplace=True)
+        df.set_index('日期', inplace=True)
+        return df
+        
+        
+    def _add_history(self): 
+        df = pd.DataFrame(self.statistics['dailyNewAddHistory'])
+        df.rename(columns=self._trans, inplace=True)
+        df.set_index('日期', inplace=True)
+        return df
+    
+    
+    def _dead_rate_history(self): 
+        df = pd.DataFrame(self.statistics['dailyDeadRateHistory'])
+        df.rename(columns=self._trans, inplace=True)
+        df.set_index('日期', inplace=True)
+        return df
+    
+    
+    def _confirm_add_rank(self): 
+        df = pd.DataFrame(self.statistics['confirmAddRank'])
+        df.rename(columns=self._trans, inplace=True)
+        df.index = df.index + 1
+        return df
+    
+    
+    def _news(self): 
+        return pd.DataFrame(self.statistics['articleList'])
     
     
     def _update_time_data(self): 
