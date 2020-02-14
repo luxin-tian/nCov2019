@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,7 +46,7 @@ Data Source: <a class="reference external" href="https://view.inews.qq.com/g2/ge
 <dl class="simple">
 <dt>statistics<span class="classifier">dict</span></dt><dd><p>The raw data retrieved from the server.</p>
 </dd>
-<dt>china<span class="classifier"></span></dt><dd><p>Nation-level data of China.</p>
+<dt>china<span class="classifier">pandas.DataFrame</span></dt><dd><p>Nation-level data of China.</p>
 </dd>
 <dt>province<span class="classifier">pandas.DataFrame</span></dt><dd><p>province-level data of China.</p>
 </dd>
@@ -53,7 +54,19 @@ Data Source: <a class="reference external" href="https://view.inews.qq.com/g2/ge
 </dd>
 <dt>international<span class="classifier">pandas.DataFrame</span></dt><dd><p>Data of foreign countries.</p>
 </dd>
+<dt>history_china<span class="classifier">pandas.DataFrame</span></dt><dd><p>Historical data of China</p>
+</dd>
+<dt>history_china_add<span class="classifier">pandas.DataFrame</span></dt><dd><p>Historical data of added confirmed cases in China</p>
+</dd>
+<dt>history_add<span class="classifier">pandas.DataFrame</span></dt><dd><p>Historical data of added confirmed cases in Hubei</p>
+</dd>
+<dt>history_dead<span class="classifier">pandas.DataFrame</span></dt><dd><p>Historical data of dead cases</p>
+</dd>
+<dt>confirm_add_rank<span class="classifier">pd.DataFrame</span></dt><dd><p>Ranking of provinces in terms of added confirmed case</p>
+</dd>
 <dt>update_time<span class="classifier">str</span></dt><dd><p>Time of the last update.</p>
+</dd>
+<dt>_trans<span class="classifier">dict</span></dt><dd><p>A dict that stores the translation of the keys from the English labels in original Jason data to Chinese</p>
 </dd>
 </dl>
 </dd></dl>
