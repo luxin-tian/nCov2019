@@ -12,20 +12,31 @@ class Data:
 
     Attributes
     ----------
-    statistics : dict
+    statistics :    dict
         The raw data retrieved from the server.
-    china : 
+    china :     pandas.DataFrame
         Nation-level data of China. 
-    province : pandas.DataFrame
+    province :  pandas.DataFrame
         province-level data of China. 
-    city : pandas.DataFrame
+    city :  pandas.DataFrame
         city-level data of China
-    international : pandas.DataFrame
+    international :     pandas.DataFrame
         Data of foreign countries. 
-    update_time : str
+    history_china :   pandas.DataFrame
+        Historical data of China
+    history_china_add :     pandas.DataFrame
+        Historical data of added confirmed cases in China
+    history_add :   pandas.DataFrame
+        Historical data of added confirmed cases in Hubei
+    history_dead :  pandas.DataFrame
+        Historical data of dead cases
+    confirm_add_rank :  pd.DataFrame
+        Ranking of provinces in terms of added confirmed case 
+    update_time :   str
         Time of the last update. 
+    _trans :    dict
+        A dict that stores the translation of the keys from the English labels in original Jason data to Chinese
     
-
     """
     
     

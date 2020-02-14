@@ -6,6 +6,8 @@
 nCov2019 Documentation
 ======================
 
+`nCov2019` provides tools to access the statistics of the 2019 Novel Coronavirus. The data is retrieved from `Tencent<https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5>`_. Currently no validation of the data with the CDC is conducted. Please refer to http://www.nhc.gov.cn/ for the official release of the epidemic data and statistics. 
+
 .. toctree::
    :maxdepth: 4
    
