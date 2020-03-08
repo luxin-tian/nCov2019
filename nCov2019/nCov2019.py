@@ -23,14 +23,19 @@ class Data:
     international :     pandas.DataFrame
         Data of foreign countries. 
     history_china :   pandas.DataFrame
+        Not supported after v3.0. 
         Historical data of China
     history_china_add :     pandas.DataFrame
+        Not supported after v3.0. 
         Historical data of added confirmed cases in China
     history_add :   pandas.DataFrame
+        Not supported after v3.0. 
         Historical data of added confirmed cases in Hubei
     history_dead :  pandas.DataFrame
+        Not supported after v3.0. 
         Historical data of dead cases
     confirm_add_rank :  pd.DataFrame
+        Not supported after v3.0. 
         Ranking of provinces in terms of added confirmed case 
     update_time :   str
         Time of the last update. 
@@ -69,11 +74,11 @@ class Data:
         self.city = self._city_data()
         self.international = self._country_data()
         self.update_time = self._update_time_data()
-        self.history_china = self._china_history()
-        self.history_china_add = self._china_add_history()
-        self.history_add = self._add_history()
-        self.history_dead = self._dead_rate_history()
-        self.confirm_add_rank = self._confirm_add_rank()
+#         self.history_china = self._china_history()
+#         self.history_china_add = self._china_add_history()
+#         self.history_add = self._add_history()
+#         self.history_dead = self._dead_rate_history()
+#         self.confirm_add_rank = self._confirm_add_rank()
         self.news = self._news()
         
         
